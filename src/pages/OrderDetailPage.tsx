@@ -10,7 +10,7 @@ type Product = {
   description: string;
   category: string;
   image: string;
-  status: null;
+  status: string;
 };
 
 const statusSchema = Yup.object().shape({
@@ -99,17 +99,15 @@ export default function OrderDetailPage() {
       <Formik
         initialValues={{ status: order }}
         validationSchema={statusSchema}
-        onSubmit={async (values, { setSubmitting }) => {
+        onSubmit={async () => {
           try {
-            await updateStatus({ id: order.id, status: values.status });
+            await updateStatus({ id: order.id, status: "status" });
           } catch (error) {
             console.error(error);
-          } finally {
-            setSubmitting(false);
           }
         }}
       >
-        {({ isSubmitting, errors, touched }) => (
+        {({ isSubmitting }) => (
           <Form className="space-y-4">
             <div>
               <label htmlFor="status" className="block mb-2">
@@ -124,9 +122,6 @@ export default function OrderDetailPage() {
                 <option value="paid">Paid</option>
                 <option value="shipped">Shipped</option>
               </Field>
-              {errors.status && touched.status && (
-                <div className="text-red-500 text-sm">{errors.status}</div>
-              )}
             </div>
 
             <button
