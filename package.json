@@ -1,6 +1,6 @@
 {
   "name": "order-manager",
-  "homepage": "https://maksdavydenko.github.io/order-manager/",
+  "homepage": "https://maksdavydenko.github.io/order-manager/orders/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
